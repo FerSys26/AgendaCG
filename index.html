@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#1f3553">
+    <meta name="description" content="Agenda personal local. Tus citas permanecen en tu dispositivo.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/icon.svg">
+    <title>AgendaCG</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="app-header no-print">
+            <div>
+                <div class="eyebrow">ORGANIZACIÓN PERSONAL</div>
+                <h1>AgendaCG</h1>
+                <p class="subtitle">Tu tiempo, organizado con claridad.</p>
+            </div>
+            <div class="header-actions">
+                <button class="button button-light" id="installBtn" hidden>Instalar AgendaCG</button>
+                <button class="button button-light" id="backupBtn">Copias de seguridad</button>
+                <button class="button button-light" id="manageCategoriesBtn">Etiquetas</button>
+                <button class="button button-primary" id="newEventBtn">＋ Nueva cita</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="search-bar no-print" aria-label="Buscar citas">
+                <input id="searchInput" type="search" placeholder="Buscar por título, lugar u observaciones..." autocomplete="off">
+                <button class="button button-light" id="clearSearchBtn" type="button">Limpiar</button>
+            </section>
+            <section class="toolbar no-print">
+                <div class="view-tabs" role="group" aria-label="Tipo de vista">
+                    <button class="view-tab active" data-view="day">Diaria</button>
+                    <button class="view-tab" data-view="week">Semanal</button>
+                    <button class="view-tab" data-view="fortnight">Quincenal</button>
+                    <button class="view-tab" data-view="month">Mensual</button>
+                    <button class="view-tab" data-view="year">Anual</button>
+                </div>
+                <div class="date-navigation">
+                    <button class="icon-button" id="prevBtn" aria-label="Periodo anterior">‹</button>
+                    <button class="today-button" id="todayBtn">Hoy</button>
+                    <button class="icon-button" id="nextBtn" aria-label="Periodo siguiente">›</button>
+                    <div class="period-title" id="periodTitle"></div>
+                </div>
+                <div class="toolbar-actions">
+                    <button class="button button-light" id="printBtn">Imprimir A4</button>
+                </div>
+            </section>
+
+            <section class="summary-row" id="summaryRow">
+                <div class="summary-card">
+                    <span class="summary-label">CITAS DEL PERIODO</span>
+                    <strong id="periodCount">0</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">PRÓXIMA CITA</span>
+                    <strong class="summary-next" id="nextEvent">Sin citas próximas</strong>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">ETIQUETAS ACTIVAS</span>
+                    <strong id="categoryCount">0</strong>
+                </div>
+            </section>
+
+            <section class="calendar-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2 id="viewHeading">Agenda diaria</h2>
+                        <p id="viewDescription">Citas programadas para el día seleccionado.</p>
+                    </div>
+                    <div class="panel-legend" id="legend"></div>
+                </div>
+                <div id="calendarView" class="calendar-view"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-brand">AgendaCG · Agenda personal local</div>
+            <div>© 2026 Claudio González. Todos los derechos reservados.</div>
+            <div>Desarrollado por Claudio González · Versión 1.0 · Fecha de creación: 11/2026</div>
+            <div>Licencia: uso personal y no comercial · Contacto: <a href="mailto:claudiotarragona@gmail.com">claudiotarragona@gmail.com</a></div>
+            <div class="footer-storage">Los datos se guardan exclusivamente en este dispositivo.</div>
+        </footer>
+    </div>
+
+    <div class="modal-backdrop hidden no-print" id="eventModal">
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">GESTIÓN DE AGENDA</div>
+                    <h2 id="eventModalTitle">Nueva cita</h2>
+                </div>
+                <button class="close-button" data-close="eventModal" aria-label="Cerrar">×</button>
+            </div>
+            <form id="eventForm">
+                <input type="hidden" id="eventId">
+                <label for="eventTitle">Título de la cita <span class="required">*</span></label>
+                <input id="eventTitle" maxlength="120" required placeholder="Ej. Visita médica">
+
+                <div class="form-grid">
+                    <div>
+                        <label for="eventDate">Fecha <span class="required">*</span></label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    <div>
+                        <label for="eventCategory">Tipo de cita</label>
+                        <select id="eventCategory"></select>
+                    </div>
+                    <div>
+                        <label for="eventStart">Hora de inicio</label>
+                        <input type="time" id="eventStart">
+                    </div>
+                    <div>
+                        <label for="eventEnd">Hora de finalización</label>
+                        <input type="time" id="eventEnd">
+                    </div>
+                </div>
+
+                <label for="eventLocation">Lugar</label>
+                <input id="eventLocation" maxlength="160" placeholder="Dirección o lugar (opcional)">
+                <label for="eventNotes">Observaciones</label>
+                <textarea id="eventNotes" rows="4" maxlength="1500" placeholder="Detalles que quieras recordar..."></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" class="button button-light" data-close="eventModal">Cancelar</button>
+                    <button type="submit" class="button button-primary">Guardar cita</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <div class="modal-backdrop hidden no-print" id="categoriesModal">
+        <section class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="categoriesTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">PERSONALIZACIÓN</div>
+                    <h2 id="categoriesTitle">Etiquetas de cita</h2>
+                    <p class="modal-intro">Crea y administra los tipos que utilizarás en tu agenda.</p>
+                </div>
+                <button class="close-button" data-close="categoriesModal" aria-label="Cerrar">×</button>
+            </div>
+
+            <form id="categoryForm" class="category-form">
+                <input type="hidden" id="categoryId">
+                <input id="categoryName" maxlength="50" required placeholder="Nombre de la etiqueta">
+                <input type="color" id="categoryColor" value="#3975bd" aria-label="Color de etiqueta">
+                <button class="button button-primary" type="submit" id="categorySaveBtn">Añadir</button>
+                <button class="button button-light hidden" type="button" id="categoryCancelBtn">Cancelar</button>
+            </form>
+
+            <div id="categoryList" class="category-list"></div>
+            <p class="small-note">No se puede eliminar una etiqueta que esté asignada a una cita. Primero cambia el tipo de esas citas.</p>
+        </section>
+    </div>
+
+    <div class="modal-backdrop hidden no-print" id="backupModal">
+        <section class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+            <div class="modal-header">
+                <div><div class="eyebrow">PROTECCIÓN DE DATOS</div><h2 id="backupTitle">Copias de seguridad</h2>
+                <p class="modal-intro">Exporta tus citas a un archivo o restaura una copia anterior.</p></div>
+                <button class="close-button" data-close="backupModal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="backup-actions">
+                <button class="button button-primary" id="exportBackupBtn" type="button">Exportar copia JSON</button>
+                <label class="button button-light file-button" for="importBackupInput">Restaurar copia JSON</label>
+                <input id="importBackupInput" type="file" accept="application/json,.json" hidden>
+            </div>
+            <p class="small-note">La copia incluye las citas y las etiquetas. Guárdala en un lugar seguro. La restauración sustituye los datos actuales de este dispositivo.</p>
+        </section>
+    </div>
+    <div class="toast no-print" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>
