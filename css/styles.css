@@ -265,3 +265,14 @@ button, .button { touch-action:manipulation; }
   .event-card { grid-template-columns:51px 3px minmax(0,1fr); gap:6px; }
   .year-grid { grid-template-columns:1fr; }
 }
+
+
+/* Cuenta y sincronización segura */
+.link-button{border:0;background:none;color:#2865a8;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+#cloudStatus{font-weight:600}
+#cloudStatus[data-state="success"]{color:#18794e}
+#cloudStatus[data-state="warning"]{color:#946200}
+#cloudStatus[data-state="error"]{color:#b42318}
+.auth-message{min-height:1.3em;color:#b42318;font-size:13px;margin:8px 0}
+#authSubmit:disabled{opacity:.65;cursor:wait}
+#accountModal{z-index:11000}

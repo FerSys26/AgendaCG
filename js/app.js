@@ -98,10 +98,24 @@ async function writeStoredAgenda(data) {
 
 async function loadData() {
     try {
-        const data = await readStoredAgenda();
+        let data = await readStoredAgenda();
         events = Array.isArray(data.events) ? data.events : [];
         categories = Array.isArray(data.categories) ? data.categories : [];
         render();
+        if (window.AgendaCloud) {
+            try {
+                const result = await window.AgendaCloud.init(data);
+                if (result && result.data) {
+                    events = Array.isArray(result.data.events) ? result.data.events : [];
+                    categories = Array.isArray(result.data.categories) ? result.data.categories : [];
+                    if (result.authenticated) await writeStoredAgenda(result.data);
+                    render();
+                }
+            } catch (syncError) {
+                console.error('AgendaCG: sincronización inicial no disponible:', syncError);
+                showToast('No se pudo conectar con la nube. Se mantienen los datos locales.');
+            }
+        }
     } catch (error) {
         events = []; categories = [];
         $('calendarView').innerHTML = `<div class="empty-state"><strong>No se pudo abrir la agenda</strong>${escapeHtml(error.message)}<br>Comprueba que has abierto AgendaCG desde su dirección de instalación.</div>`;
@@ -109,7 +123,9 @@ async function loadData() {
 }
 
 async function saveData() {
-    await writeStoredAgenda({events, categories, updatedAt:new Date().toISOString()});
+    const data = {events, categories, updatedAt:new Date().toISOString()};
+    await writeStoredAgenda(data);
+    if (window.AgendaCloud) await window.AgendaCloud.save(data);
 }
 
 function eventMatchesSearch(event) {
@@ -582,4 +598,13 @@ window.editCategory=editCategory;
 window.deleteCategory=deleteCategory;
 window.selectDate=selectDate;
 
+window.AgendaStorage = {read: readStoredAgenda, write: writeStoredAgenda};
+window.addEventListener('agendacloudready', async event => {
+    const data = event.detail || {events:[],categories:[]};
+    events = Array.isArray(data.events) ? data.events : [];
+    categories = Array.isArray(data.categories) ? data.categories : [];
+    try { await writeStoredAgenda(data); } catch (error) { console.error(error); }
+    render();
+    showToast('Agenda recuperada y sincronizada.');
+});
 loadData();

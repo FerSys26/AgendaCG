@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#1f3553">
-    <meta name="description" content="Agenda personal local. Tus citas permanecen en tu dispositivo.">
+    <meta name="description" content="AgendaCG: agenda personal con almacenamiento local y sincronización segura.">
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icons/icon.svg">
@@ -79,11 +79,12 @@
         </main>
 
         <footer class="app-footer">
-            <div class="footer-brand">AgendaCG · Agenda personal local</div>
+            <div class="footer-brand">AgendaCG · Agenda personal</div>
             <div>© 2026 Claudio González. Todos los derechos reservados.</div>
             <div>Desarrollado por Claudio González · Versión 1.0 · Fecha de creación: 11/2026</div>
             <div>Licencia: uso personal y no comercial · Contacto: <a href="mailto:claudiotarragona@gmail.com">claudiotarragona@gmail.com</a></div>
-            <div class="footer-storage">Los datos se guardan exclusivamente en este dispositivo.</div>
+            <div class="footer-storage" id="cloudStatus" role="status">Preparando almacenamiento seguro…</div>
+            <div><a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> · <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> · <button class="link-button" type="button" id="logoutBtn">Cerrar sesión</button></div>
         </footer>
     </div>
 
@@ -172,7 +173,25 @@
             <p class="small-note">La copia incluye las citas y las etiquetas. Guárdala en un lugar seguro. La restauración sustituye los datos actuales de este dispositivo.</p>
         </section>
     </div>
+    <div class="modal-backdrop hidden no-print" id="accountModal">
+        <section class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+            <div class="modal-header"><div><div class="eyebrow">PROTECCIÓN DE TUS CITAS</div><h2 id="accountTitle">Acceder a AgendaCG</h2><p class="modal-intro">Tu cuenta permite recuperar la agenda si borras los datos de navegación o cambias de dispositivo.</p></div></div>
+            <form id="authForm">
+                <input type="hidden" id="authMode" value="login">
+                <label for="authEmail">Correo electrónico</label>
+                <input type="email" id="authEmail" autocomplete="username" maxlength="254" required>
+                <label for="authPassword">Contraseña</label>
+                <input type="password" id="authPassword" autocomplete="current-password" minlength="10" maxlength="128" required>
+                <p class="small-note">Utiliza una contraseña de al menos 10 caracteres. No reutilices una contraseña importante de otros servicios.</p>
+                <p id="authMessage" class="auth-message" role="alert"></p>
+                <div class="modal-actions"><button type="button" class="button button-light" id="authSwitch">Crear una cuenta</button><button type="submit" class="button button-primary" id="authSubmit">Iniciar sesión</button></div>
+            </form>
+            <p class="small-note">Al continuar aceptas las <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> y has leído la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>.</p>
+        </section>
+    </div>
     <div class="toast no-print" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/config.js"></script>
+    <script src="js/cloud.js"></script>
     <script src="js/app.js"></script>
     <script src="js/pwa.js"></script>
 </body>

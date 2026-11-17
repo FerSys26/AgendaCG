@@ -1,0 +1,13 @@
+name = "agendacg-api"
+main = "worker.js"
+compatibility_date = "2026-11-17"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "agendacg-db"
+database_id = "d48c6fa7-4635-456e-8edf-78a8f02d07df"
+
+[vars]
+# Sustituye por el ORIGEN exacto donde se publica AgendaCG, sin ruta final.
+# Ejemplo GitHub Pages: https://TUUSUARIO.github.io
+ALLOWED_ORIGIN = "https://fersys26.github.io"
