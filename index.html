@@ -53,6 +53,7 @@
                 <button class="button button-light" id="installBtn" hidden>Instalar AgendaCG</button>
                 <button class="button button-light" id="backupBtn">Copias de seguridad</button>
                 <button class="button button-light" id="manageCategoriesBtn">Etiquetas</button>
+                <button class="button button-light account-access-button" id="logoutBtn" type="button">Mi cuenta / Sincronizar</button>
                 <button class="button button-primary" id="newEventBtn">＋ Nueva cita</button>
             </div>
         </header>
@@ -134,7 +135,7 @@
             <div>Desarrollado por Claudio González · Versión 1.0 · Fecha de creación: 11/2026</div>
             <div>Licencia: uso personal y no comercial · Contacto: <a href="mailto:claudiotarragona@gmail.com">claudiotarragona@gmail.com</a></div>
             <div class="footer-storage" id="cloudStatus" role="status">Preparando almacenamiento seguro…</div>
-            <div><a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> · <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> · <button class="link-button" type="button" id="logoutBtn">Acceder / sincronizar</button></div>
+            <div><a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> · <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a></div>
         </footer>
     </div>
 
@@ -225,7 +226,7 @@
     </div>
     <div class="modal-backdrop hidden no-print" id="accountModal">
         <section class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
-            <div class="modal-header"><div><div class="eyebrow">PROTECCIÓN DE TUS CITAS</div><h2 id="accountTitle">Acceder a AgendaCG</h2><p class="modal-intro">Tu cuenta permite recuperar la agenda si borras los datos de navegación o cambias de dispositivo.</p></div></div>
+            <div class="modal-header"><div><div class="eyebrow">PROTECCIÓN DE TUS CITAS</div><h2 id="accountTitle">Acceder a AgendaCG</h2><p class="modal-intro">Puedes usar AgendaCG sin cuenta: tus citas se guardan en este dispositivo. Si quieres recuperar tu agenda en otros dispositivos, inicia sesión o crea una cuenta para activar la sincronización en la nube.</p></div></div>
             <form id="authForm">
                 <input type="hidden" id="authMode" value="login">
                 <label for="authEmail">Correo electrónico</label>
