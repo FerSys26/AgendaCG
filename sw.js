@@ -1,4 +1,4 @@
-const CACHE_NAME = 'agendacg-pwa-v4';
+const CACHE_NAME = 'agendacg-pwa-v5';
 const APP_FILES = ['./','./index.html','./css/styles.css','./js/app.js','./js/pwa.js','./js/cloud.js','./js/config.js','./manifest.webmanifest','./privacidad.html','./condiciones.html','./icons/icon-192.png','./icons/icon-512.png','./icons/icon.svg'];
 self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
