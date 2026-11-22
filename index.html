@@ -226,7 +226,17 @@
     </div>
     <div class="modal-backdrop hidden no-print" id="accountModal">
         <section class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
-            <div class="modal-header"><div><div class="eyebrow">PROTECCIÓN DE TUS CITAS</div><h2 id="accountTitle">Acceder a AgendaCG</h2><p class="modal-intro">Puedes usar AgendaCG sin cuenta: tus citas se guardan en este dispositivo. Si quieres recuperar tu agenda en otros dispositivos, inicia sesión o crea una cuenta para activar la sincronización en la nube.</p></div></div>
+            <div class="modal-header"><div><div class="eyebrow">ELIGE CÓMO QUIERES USAR TU AGENDA</div><h2 id="accountTitle">Mi cuenta y sincronización</h2><p class="modal-intro">No necesitas registrarte para utilizar AgendaCG. Puedes empezar ahora mismo y guardar tus citas en este dispositivo.</p></div></div>
+            <div class="account-choice">
+                <h3>Usar AgendaCG sin cuenta</h3>
+                <p>Entra directamente, crea citas y organiza tu calendario. Tus datos se guardan en este navegador y permanecen en este dispositivo; no se envían a la nube ni aparecen automáticamente en otros dispositivos.</p>
+                <p class="small-note"><strong>Importante:</strong> si borras los datos del navegador o cambias de dispositivo, podrías perder el acceso a esas citas. Para conservarlas, utiliza «Copias de seguridad» y guarda un archivo de respaldo.</p>
+                <button type="button" class="button button-light" id="continueLocalBtn">Continuar sin cuenta</button>
+            </div>
+            <div class="account-choice account-choice-cloud">
+                <h3>Sincronizar con una cuenta</h3>
+                <p>Si quieres utilizar la misma agenda en varios dispositivos y recuperar tus citas desde ellos, inicia sesión con tu cuenta o crea una nueva. La sincronización en la nube requiere conexión a Internet.</p>
+            </div>
             <form id="authForm">
                 <input type="hidden" id="authMode" value="login">
                 <label for="authEmail">Correo electrónico</label>
