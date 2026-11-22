@@ -6,7 +6,7 @@ const b64u = bytes => btoa(String.fromCharCode(...new Uint8Array(bytes))).replac
 const fromB64u = value => Uint8Array.from(atob(value.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
 async function digestPassword(password,salt) {
   const key=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveBits']);
-  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:210000,hash:'SHA-256'},key,256);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},key,256);
   return b64u(bits);
 }
 async function sign(payload,secret) {
