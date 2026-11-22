@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://agendacg.pages.dev/sitemap.xml
+Sitemap: https://fersys26.github.io/AgendaCG/sitemap.xml
