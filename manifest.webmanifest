@@ -2,7 +2,7 @@
   "id": "./",
   "name": "AgendaCG - Agenda personal",
   "short_name": "AgendaCG",
-  "description": "Agenda personal que guarda tus datos en este dispositivo.",
+  "description": "Organiza tus citas y actividades con vistas diaria, semanal, quincenal, mensual y anual. Personaliza etiquetas y realiza copias de seguridad.",
   "lang": "es-ES",
   "start_url": "./",
   "scope": "./",
@@ -23,5 +23,9 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "categories": [
+    "productivity",
+    "utilities"
   ]
 }
