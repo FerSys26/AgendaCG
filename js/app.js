@@ -554,6 +554,7 @@ $("nextBtn").addEventListener("click",()=>navigate(1));
 $("todayBtn").addEventListener("click",()=>{anchorDate=startOfDay(new Date());render();});
 $("newEventBtn").addEventListener("click",()=>openNewEvent());
 $("manageCategoriesBtn").addEventListener("click",openCategories);
+$("helpBtn").addEventListener("click",()=>$("helpModal").classList.remove("hidden"));
 $("printBtn").addEventListener("click",()=>window.print());
 document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>$(b.dataset.close).classList.add("hidden")));
 document.querySelectorAll(".modal-backdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.add("hidden");}));
