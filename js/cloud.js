@@ -118,6 +118,10 @@
     setMode('login');
     window.setInterval(refresh, 60000);
     window.addEventListener('focus', refresh);
+    document.getElementById('continueLocalBtn')?.addEventListener('click', () => {
+      hideAuth();
+      status('Modo local: tus citas se guardan en este navegador y dispositivo. Usa Copias de seguridad para conservar una copia.', 'info');
+    });
     document.getElementById('authSwitch')?.addEventListener('click', () => {
       setMode(document.getElementById('authMode').value === 'login' ? 'register' : 'login');
     });
