@@ -287,3 +287,26 @@ button, .button { touch-action:manipulation; }
   .account-access-button { grid-column:1 / -1; grid-row:1; }
   #newEventBtn { grid-column:1 / -1; grid-row:2; }
 }
+
+
+/* Centro de ayuda: información bajo demanda, sin ocupar la página principal */
+.footer-help { margin-top:2px; }
+.footer-help-button { border:0; padding:0; background:transparent; color:#2868a8; font:inherit; cursor:pointer; }
+.footer-help-button:hover { text-decoration:underline; }
+.help-modal { width:min(760px,100%); }
+.help-content { display:flex; flex-direction:column; gap:0; }
+.help-section { padding:13px 0; border-top:1px solid #e8edf3; }
+.help-section h3 { margin:0 0 6px; color:#314b68; font-size:15px; }
+.help-section p { margin:0; color:#61748a; font-size:13px; line-height:1.6; }
+.help-section p + p { margin-top:8px; }
+.help-section a { color:#2868a8; text-decoration:none; }
+.help-section a:hover { text-decoration:underline; }
+.help-tip { padding:9px 11px; border-left:3px solid #78a5d0; background:#f3f7fb; border-radius:0 6px 6px 0; }
+.help-last { padding-bottom:0; }
+@media (max-width:680px) {
+  .help-modal { max-height:92dvh; }
+  .help-section { padding:11px 0; }
+  .help-section h3 { font-size:14px; }
+  .help-section p { font-size:12px; }
+}
+@media print { .footer-help { display:none !important; } }
