@@ -53,7 +53,12 @@
       initialized = true;
       return {data:localData, authenticated:false};
     }
-    if (!token) { showAuth(); return {data:localData, authenticated:false, needsLogin:true}; }
+    if (!token) {
+      initialized = true;
+      status('Modo local: tus citas se guardan en este dispositivo. Accede a tu cuenta si quieres sincronizarlas en la nube.', 'info');
+      hideAuth();
+      return {data:localData, authenticated:false};
+    }
     try {
       const remote = await remoteGet();
       const cloudData = remote.data || {events:[], categories:[]};
@@ -67,11 +72,13 @@
       }
       initialized = true;
       hideAuth(); status('Agenda sincronizada y protegida en la nube.', 'success');
+      const accountButton=document.getElementById('logoutBtn'); if(accountButton) accountButton.textContent='Cerrar sesión';
       return {data:chosen, authenticated:true};
     } catch (error) {
       if (/401|sesión|token/i.test(error.message)) {
-        token=''; localStorage.removeItem(TOKEN_KEY); showAuth();
-        return {data:localData, authenticated:false, needsLogin:true};
+        token=''; localStorage.removeItem(TOKEN_KEY); initialized=true; hideAuth();
+        status('Tu sesión ha caducado. La agenda sigue disponible en este dispositivo; accede de nuevo para sincronizar.', 'warning');
+        return {data:localData, authenticated:false};
       }
       status(`No se pudo sincronizar: ${error.message}`, 'error');
       throw error;
@@ -79,7 +86,7 @@
   }
   async function save(data) {
     if (!API_URL || !token) {
-      if (API_URL) status('Cambios guardados solo en este dispositivo: inicia sesión para sincronizar.', 'warning');
+      if (API_URL) status('Cambios guardados en este dispositivo. Accede a tu cuenta para sincronizarlos en la nube.', 'info');
       return false;
     }
     if (syncing) throw new Error('Hay otra sincronización en curso. Espera un momento.');
@@ -128,13 +135,22 @@
         const local=await window.AgendaStorage.read();
         const result=await init(local);
         if (result.authenticated) {
+          const accountButton=document.getElementById('logoutBtn'); if(accountButton) accountButton.textContent='Cerrar sesión';
+          hideAuth();
           window.dispatchEvent(new CustomEvent('agendacloudready',{detail:result.data}));
         }
       } catch(error) { message.textContent=error.message; }
       finally { button.disabled=false; }
     });
     document.getElementById('logoutBtn')?.addEventListener('click', () => {
-      token=''; localStorage.removeItem(TOKEN_KEY); initialized=false; showAuth();
+      if (token) {
+        token=''; localStorage.removeItem(TOKEN_KEY); initialized=false;
+        status('Sesión cerrada. Tus citas permanecen guardadas en este dispositivo.', 'info');
+        document.getElementById('logoutBtn').textContent='Acceder / sincronizar';
+      } else {
+        setMode('login');
+        showAuth();
+      }
     });
   });
   window.AgendaCloud={init,save,showAuth,status,refresh,get authenticated(){return !!token;}};
