@@ -276,3 +276,14 @@ button, .button { touch-action:manipulation; }
 .auth-message{min-height:1.3em;color:#b42318;font-size:13px;margin:8px 0}
 #authSubmit:disabled{opacity:.65;cursor:wait}
 #accountModal{z-index:11000}
+
+
+/* Acceso visible a cuenta y sincronización */
+.account-access-button { border-color:#9fb5cc; color:#244d77; background:#fff; }
+.account-access-button:hover { background:#edf4fb; border-color:#6f94ba; }
+@media (max-width:680px) {
+  .header-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:8px; }
+  .header-actions .button { min-height:44px; padding:9px 8px; font-size:12px; }
+  .account-access-button { grid-column:1 / -1; grid-row:1; }
+  #newEventBtn { grid-column:1 / -1; grid-row:2; }
+}
