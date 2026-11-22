@@ -18,7 +18,17 @@
     if (!API_URL) throw new Error('Falta configurar la dirección del servidor de AgendaCG.');
     const headers = {'Content-Type':'application/json', ...(options.headers||{})};
     if (token) headers.Authorization = `Bearer ${token}`;
-    const response = await fetch(`${API_URL.replace(/\/$/,'')}${path}`, {...options, headers});
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    let response;
+    try {
+      response = await fetch(`${API_URL.replace(/\/$/,'')}${path}`, {...options, headers, signal:controller.signal});
+    } catch (error) {
+      if (error.name === 'AbortError') throw new Error('La conexión con el servidor ha tardado más de 20 segundos. Comprueba la publicación del Worker y su configuración CORS.');
+      throw new Error('No se pudo conectar con el servidor de AgendaCG. Comprueba la conexión y la configuración CORS.');
+    } finally {
+      clearTimeout(timeout);
+    }
     const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error || `Error del servidor (${response.status}).`);
     return body;
