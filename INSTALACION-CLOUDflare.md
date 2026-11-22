@@ -76,7 +76,9 @@ Guarda el archivo y publica todos los archivos del proyecto en GitHub Pages. No 
 
 ## Seguridad y privacidad
 
-- Las contraseñas se procesan con PBKDF2-HMAC-SHA-256, sal aleatoria individual y 210.000 iteraciones. No se guardan contraseñas en texto legible.
+- Cloudflare Workers limita PBKDF2 a 100.000 iteraciones en su implementación de Web Crypto. Por eso el Worker utiliza ese máximo y no 210.000: superar el límite provoca un fallo criptográfico y puede dejar el formulario mostrando «Conectando…».
+
+- Las contraseñas se procesan con PBKDF2-HMAC-SHA-256, sal aleatoria individual y 100.000 iteraciones. Este es el máximo admitido por el runtime Web Crypto de Cloudflare Workers; un valor superior provoca un error al registrar o verificar la contraseña. No se guardan contraseñas en texto legible.
 - Los tokens de sesión tienen una duración de 30 días y se guardan en el almacenamiento local del navegador. Si se borran los datos del navegador, se deberá iniciar sesión otra vez.
 - El Worker solo acepta el origen configurado en `ALLOWED_ORIGIN`.
 - Cada usuario solo puede consultar y modificar su propio registro.
