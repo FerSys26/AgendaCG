@@ -77,7 +77,7 @@ Guarda el archivo y publica todos los archivos del proyecto en GitHub Pages. No 
 ## Seguridad y privacidad
 
 
-- Las contraseñas se procesan con PBKDF2-HMAC-SHA-256, sal aleatoria individual y 210.000 iteraciones. No se guardan contraseñas en texto legible.
+- Las contraseñas se procesan con PBKDF2-HMAC-SHA-256, sal aleatoria individual y 100.000 iteraciones. No se guardan contraseñas en texto legible.
 - Los tokens de sesión tienen una duración de 30 días y se guardan en el almacenamiento local del navegador. Si se borran los datos del navegador, se deberá iniciar sesión otra vez.
 - El Worker solo acepta el origen configurado en `ALLOWED_ORIGIN`.
 - Cada usuario solo puede consultar y modificar su propio registro.
