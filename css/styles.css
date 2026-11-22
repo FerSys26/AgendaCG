@@ -310,3 +310,12 @@ button, .button { touch-action:manipulation; }
   .help-section p { font-size:12px; }
 }
 @media print { .footer-help { display:none !important; } }
+
+
+/* Botón principal de ayuda, situado justo bajo la identidad de AgendaCG */
+.footer-help-main { margin:9px 0 10px; }
+.footer-help-button { display:inline-flex; align-items:center; justify-content:center; min-width:210px; padding:11px 22px; border-radius:9px; font-size:14px; font-weight:700; }
+@media (max-width:680px) {
+  .footer-help-main { margin:10px 0 12px; }
+  .footer-help-button { width:min(100%,280px); min-height:44px; font-size:14px; }
+}
