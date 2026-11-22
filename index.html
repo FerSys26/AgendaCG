@@ -108,25 +108,6 @@
                 <div id="calendarView" class="calendar-view"></div>
             </section>
 
-            <section class="seo-intro" aria-labelledby="seo-heading">
-                <h2 id="seo-heading">Una agenda online para organizar tus citas y actividades</h2>
-                <p>AgendaCG es una agenda personal y calendario online que te ayuda a planificar tus compromisos, consultar tus próximas citas y mantener tus actividades organizadas desde el navegador.</p>
-                <div class="seo-features">
-                    <article>
-                        <h3>Consulta tu calendario como prefieras</h3>
-                        <p>Organiza el tiempo con vistas diaria, semanal, quincenal, mensual y anual. Cambia de periodo, vuelve al día de hoy y localiza citas por su título, lugar, observaciones o etiqueta.</p>
-                    </article>
-                    <article>
-                        <h3>Personaliza y encuentra tus citas</h3>
-                        <p>Crea etiquetas con colores para clasificar tus actividades. Añade fechas, horas, lugares y notas para tener la información importante de cada cita en un solo lugar.</p>
-                    </article>
-                    <article>
-                        <h3>Guarda, recupera e imprime tu agenda</h3>
-                        <p>AgendaCG guarda los datos en el navegador y permite exportar e importar copias de seguridad. También puedes imprimir tu calendario en formato A4. Si utilizas una cuenta, la sincronización en la nube permite recuperar la agenda en otros dispositivos.</p>
-                    </article>
-                </div>
-                <p class="seo-note">AgendaCG está diseñada para la organización personal. Puedes consultar la <a href="privacidad.html">Política de Privacidad</a> y las <a href="condiciones.html">Condiciones de Uso</a> para conocer cómo funciona el servicio.</p>
-            </section>
         </main>
 
         <footer class="app-footer">
@@ -135,7 +116,7 @@
             <div>Desarrollado por Claudio González · Versión 1.0 · Fecha de creación: 11/2026</div>
             <div>Licencia: uso personal y no comercial · Contacto: <a href="mailto:claudiotarragona@gmail.com">claudiotarragona@gmail.com</a></div>
             <div class="footer-storage" id="cloudStatus" role="status">Preparando almacenamiento seguro…</div>
-            <div><a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> · <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a></div>
+            <div class="footer-help"><button class="footer-help-button" id="helpBtn" type="button">Ayuda e información</button> · <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> · <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a></div>
         </footer>
     </div>
 
@@ -248,6 +229,52 @@
                 <div class="modal-actions"><button type="button" class="button button-light" id="authSwitch">Crear una cuenta</button><button type="submit" class="button button-primary" id="authSubmit">Iniciar sesión</button></div>
             </form>
             <p class="small-note">Al continuar aceptas las <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> y has leído la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>.</p>
+        </section>
+    </div>
+    <div class="modal-backdrop hidden no-print" id="helpModal">
+        <section class="modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">CENTRO DE AYUDA</div>
+                    <h2 id="helpTitle">Ayuda e información</h2>
+                    <p class="modal-intro">Todo lo que necesitas para aprovechar AgendaCG.</p>
+                </div>
+                <button class="close-button" data-close="helpModal" aria-label="Cerrar">×</button>
+            </div>
+            <div class="help-content">
+                <article class="help-section">
+                    <h3>1. Organiza tu calendario</h3>
+                    <p>Utiliza las vistas diaria, semanal, quincenal, mensual o anual para consultar tus actividades. Los botones de navegación permiten avanzar o retroceder entre periodos y «Hoy» te lleva a la fecha actual. También puedes buscar citas por título, lugar u observaciones.</p>
+                </article>
+                <article class="help-section">
+                    <h3>2. Crea y administra tus citas</h3>
+                    <p>Pulsa «Nueva cita» e indica un título y una fecha. Si lo deseas, añade las horas de inicio y fin, el lugar, las observaciones y una etiqueta. Desde el calendario puedes abrir una cita para editarla o eliminarla.</p>
+                </article>
+                <article class="help-section">
+                    <h3>3. Personaliza las etiquetas</h3>
+                    <p>En «Etiquetas» puedes crear categorías con colores, modificar su nombre o cambiar su color. Así podrás distinguir de un vistazo los distintos tipos de actividades.</p>
+                </article>
+                <article class="help-section">
+                    <h3>4. Guarda tus datos y sincroniza</h3>
+                    <p>Sin cuenta, tus citas se guardan en el almacenamiento de este navegador y permanecen en el dispositivo donde las has creado. Para utilizar la misma agenda en varios dispositivos, inicia sesión o crea una cuenta y utiliza la sincronización en la nube. Esta opción requiere conexión a Internet.</p>
+                    <p class="help-tip">Consejo: aunque utilices la sincronización, es recomendable conservar periódicamente una copia de seguridad.</p>
+                </article>
+                <article class="help-section">
+                    <h3>5. Exporta o restaura una copia</h3>
+                    <p>Abre «Copias de seguridad» y selecciona «Exportar copia JSON» para guardar tus citas y etiquetas en un archivo. Para recuperar una copia, selecciona «Restaurar copia JSON» y elige el archivo guardado. La restauración sustituye los datos actuales de ese dispositivo.</p>
+                </article>
+                <article class="help-section">
+                    <h3>6. Imprime tu calendario en A4</h3>
+                    <p>Selecciona primero la vista y el periodo que quieras imprimir y pulsa «Imprimir A4». En la ventana de impresión puedes elegir la impresora o guardar el calendario como PDF.</p>
+                </article>
+                <article class="help-section help-last">
+                    <h3>¿Necesitas más información?</h3>
+                    <p>Consulta la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> y las <a href="condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> para conocer los detalles del servicio.</p>
+                </article>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="button button-primary" data-close="helpModal">Cerrar</button>
+            </div>
         </section>
     </div>
     <div class="toast no-print" id="toast" role="status" aria-live="polite"></div>
